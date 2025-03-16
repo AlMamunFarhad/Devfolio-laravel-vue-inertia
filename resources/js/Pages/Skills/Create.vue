@@ -20,7 +20,7 @@
                             />
                             <InputError
                                 class="mt-2"
-                                :message="form.errors.name"
+                                :message="$page.props.errors.name"
                             />
                         </div>
                         <div>
@@ -34,7 +34,7 @@
 
                             <InputError
                                 class="mt-2"
-                                :message="form.errors.image"
+                                :message="$page.props.errors.image"
                             />
                         </div>
                         <div class="mt-4 flex items-center justify-end">

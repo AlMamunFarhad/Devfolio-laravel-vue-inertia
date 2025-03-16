@@ -9,17 +9,32 @@
         <div class="py-12">
             <div class="mx-auto max-w-2xl sm:px-6 lg:px-8">
                 <div class="bg-white p-8 shadow-md rounded-md">
-                    <div class="mb-3">
-                        <InputLabel for="skill_id" value="Skill" class="mb-1"/>
-                        <select v-model="form.skill_id" name="skill_id" id="skill_id" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-full">
-                            <option v-for="skill in skills" :key="skill.id" :value="skill.id">{{ skill.name }}</option>
-                        </select>
-                        <InputError
-                                class="mt-2"
-                                :message="$page.props.errors.skill_id"
-                            />
-                    </div>
                     <form @submit.prevent="submit">
+                        <div class="mb-3">
+                            <InputLabel
+                                for="skill_id"
+                                value="Skill"
+                                class="mb-1"
+                            />
+                            <select
+                                v-model="form.skill_id"
+                                name="skill_id"
+                                id="skill_id"
+                                class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm w-full"
+                            >
+                                <option
+                                    v-for="skill in skills"
+                                    :key="skill.id"
+                                    :value="skill.id"
+                                >
+                                    {{ skill.name }}
+                                </option>
+                                <InputError
+                                class="mt-2"
+                                :message="$page.props.errors.skill.name"
+                            />
+                            </select>
+                        </div>
                         <div class="mb-3">
                             <InputLabel for="name" value="name" />
                             <TextInput
@@ -31,22 +46,21 @@
                             />
                             <InputError
                                 class="mt-2"
-                                :message="form.errors.name"
+                                :message="$page.props.errors.name"
                             />
                         </div>
                         <div class="mb-3">
                             <InputLabel for="project_url" value="URL" />
                             <TextInput
                                 id="project_url"
-                                name="project_url"
                                 type="text"
                                 class="mt-1 block w-full"
                                 v-model="form.project_url"
-                                   autocomplete="project_url"
+                                autocomplete="project_url"
                             />
                             <InputError
                                 class="mt-2"
-                                :message="form.errors.project_url"
+                                :message="$page.props.errors.project_url"
                             />
                         </div>
                         <div>
@@ -59,18 +73,13 @@
                             />
 
                             <InputError
-                                class="mt-2"
+                                 class="mt-2"
                                 :message="$page.props.errors.image"
                             />
                         </div>
                         <div class="mt-4 flex items-center justify-end">
-                            <PrimaryButton
-                                class="ms-4"
-                                :class="{ 'opacity-25': form.processing }"
-                                :disabled="form.processing"
-                            >
-                                Store
-                            </PrimaryButton>
+                            <PrimaryButton class="ms-4"
+                            > Update </PrimaryButton>
                         </div>
                     </form>
                 </div>
@@ -81,23 +90,31 @@
 
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
-import { Head, Link, useForm } from "@inertiajs/vue3";
+import { Head, useForm } from "@inertiajs/vue3";
 import InputError from "@/Components/InputError.vue";
 import InputLabel from "@/Components/InputLabel.vue";
 import PrimaryButton from "@/Components/PrimaryButton.vue";
 import TextInput from "@/Components/TextInput.vue";
+import { Inertia } from "@inertiajs/inertia";
 
-defineProps({
+const props = defineProps({
     skills: Array,
+    project: Object,
 });
 const form = useForm({
-    name: "",
+    name: props.project?.name,
     image: null,
-    project_url: "",
-    skill_id: "",
+    project_url: props.project?.project_url,
+    skill_id: props.project?.skill_id,
 });
 
 const submit = () => {
-    form.post(route("projects.store"));
+    Inertia.post(`/projects/${props.project.id}`, {
+        _method: "PUT",
+        name: form.name,
+        image: form.image,
+        project_url: form.project_url,
+        skill_id: form.skill_id,
+    });
 };
 </script>
