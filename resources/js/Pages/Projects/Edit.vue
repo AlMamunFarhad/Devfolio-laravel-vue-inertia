@@ -31,7 +31,7 @@
                                 </option>
                                 <InputError
                                 class="mt-2"
-                                :message="$page.props.errors.skill.name"
+                                :message="$page.props.errors.skill_id"
                             />
                             </select>
                         </div>

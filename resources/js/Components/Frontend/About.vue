@@ -1,6 +1,6 @@
 <template>
 <section id="about" class="section bg-light-secondary dark:bg-dark-secondary">
-    <div class="container mx-auto">
+    <div class="container mx-auto" v-motion-fade-visible>
        <div class="flex flex-col xl:flex-row gap-24">
         <img :src="AboutImg" alt="about" class="object-cover h-full w-[566px] md:mx-auto lg:mx-0 rounded-2xl">
         <div class="flex flex-col items-center text-center lg:items-start lg:text-left">

@@ -17,7 +17,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = ProjectResource::collection(Project::with('skill')->get());
+        $projects = ProjectResource::collection(Project::with('skill')->orderBy('created_at', 'DESC')->get());
         return Inertia::render('Projects/Index', compact('projects'));
     }
 

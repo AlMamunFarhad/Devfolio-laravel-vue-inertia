@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-light-tail-100 dark:bg-dark-navy-500">
+    <div id="promote" class="bg-light-tail-100 dark:bg-dark-navy-500">
       <div
         class="
           container
