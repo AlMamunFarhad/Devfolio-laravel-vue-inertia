@@ -21,10 +21,6 @@ class ProfileController extends Controller
             'status' => session('status'),
         ]);
     }
-
-    /**
-     * Update the user's profile information.
-     */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         // Validate and update the user's profile information.
@@ -35,10 +31,6 @@ class ProfileController extends Controller
         $request->user()->save();
         return Redirect::route('profile.edit');
     }
-
-    /**
-     * Delete the user's account.
-     */
     public function destroy(Request $request): RedirectResponse
     {
         // Validate and delete the user's account.
