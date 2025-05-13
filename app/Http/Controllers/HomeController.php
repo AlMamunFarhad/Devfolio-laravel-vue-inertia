@@ -16,6 +16,5 @@ class HomeController extends Controller
         $skills = SkillResource::collection(Skill::all());
         $projects = ProjectResource::collection(Project::with('skill')->get());
         return Inertia::render('Welcome', compact('skills', 'projects'));
-        
     }
 }

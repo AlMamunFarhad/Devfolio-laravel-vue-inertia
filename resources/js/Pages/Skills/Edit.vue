@@ -65,13 +65,11 @@ import { Inertia } from "@inertiajs/inertia";
 const props = defineProps({
     skill: Object,
 });
-
-
 const form = useForm({
     name: props.skill?.name,
     image: null,
 });
-
+// It sends a PUT request to the server with the form data
 const submit = () => {
     Inertia.post(`/skills/${props.skill.id}`, {
         _method: "PUT",

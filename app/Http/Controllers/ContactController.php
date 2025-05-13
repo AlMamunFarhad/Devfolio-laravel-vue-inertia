@@ -10,9 +10,7 @@ use App\Http\Requests\ContactRequest;
 class ContactController extends Controller
 {
     public function __invoke(ContactRequest $request) {
-
        Mail::to('farhadalmamun7@gmail.com')->send(new ContactMail($request->name, $request->email, $request->body));
-
        return redirect()->back();
     }
 }

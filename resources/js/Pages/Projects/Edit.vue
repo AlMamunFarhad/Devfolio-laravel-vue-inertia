@@ -71,7 +71,6 @@
                                 class="mt-1 block w-full"
                                 @input="form.image = $event.target.files[0]"
                             />
-
                             <InputError
                                  class="mt-2"
                                 :message="$page.props.errors.image"
